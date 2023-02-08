@@ -14,3 +14,5 @@ jobs:
           echo Hello, world!
           sleep 15
           echo Goodbye!
+          java --version
+          /home/centos/apache-jmeter-5.2/bin/jmeter.sh --version
