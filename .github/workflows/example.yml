@@ -16,4 +16,11 @@ jobs:
           echo Goodbye!
           java --version
           /home/centos/apache-jmeter-5.2/bin/jmeter.sh --version
-          /home/centos/apache-jmeter-5.2/bin/jmeter.sh -n -t TestScripts/Flow_AddInts_1Step.jmx -Jthreads=80 -Jduration=60
+          /home/centos/apache-jmeter-5.2/bin/jmeter.sh -n -t TestScripts/Flow_AddInts_1Step.jmx -Jthreads=80 -Jduration=60 -l Flow_AddInts_1Step.jtl
+          java -jar /home/centos/apache-jmeter-5.2/lib/CMDRunner.jar --tool Reporter --generate-csv Flow_AddInts_1Step.csv --input-jtl Flow_AddInts_1Step.jtl --plugin-type SynthesisReport
+          cat Flow_AddInts_1Step.csv
+          /home/centos/apache-jmeter-5.2/bin/jmeter.sh -g Flow_AddInts_1Step.jtl -o /Flow_AddInts_1Step_report
+      - uses: actions/upload-artifact@v3
+        with:
+          name: jmeter-results-HTML
+          path: /Flow_AddInts_1Step_report/**/*
