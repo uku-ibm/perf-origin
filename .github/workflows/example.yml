@@ -16,4 +16,4 @@ jobs:
           echo Goodbye!
           java --version
           /home/centos/apache-jmeter-5.2/bin/jmeter.sh --version
-          /home/centos/apache-jmeter-5.2/bin/jmeter.sh TestScripts/Flow_AddInts_1Step.jmx -Jthreads=80 -Jduration=60
+          /home/centos/apache-jmeter-5.2/bin/jmeter.sh -n -t TestScripts/Flow_AddInts_1Step.jmx -Jthreads=80 -Jduration=60
