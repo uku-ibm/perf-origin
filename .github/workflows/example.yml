@@ -48,8 +48,8 @@ jobs:
             java -cp bpt_utils.jar perf.bpt.metadata.TestMaster RUN_ID > temp.txt
             mkdir TEMP_DIRECTORY
         - uses: actions/download-artifact@v2
-            with:
-              name: jmeter-results-CSV
+          with:
+            name: jmeter-results-CSV
         - name: Copy file
           run: |
             echo Copy File!
