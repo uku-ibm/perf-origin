@@ -29,7 +29,7 @@ jobs:
     - uses: actions/upload-artifact@v3
       with:
           name: jmeter-results-CSV
-          path: Flow_AddInts_1St  
+          path: Flow_AddInts_1Step.csv  
   job2:
     name: Job 2
     needs: job1
