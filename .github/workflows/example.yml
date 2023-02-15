@@ -9,11 +9,27 @@ jobs:
     runs-on: CA3S-AWS
 
     steps:
-    - name: Sleep and Run
+    - uses: actions/checkout@v3
+    - name: Run a one-line script
       run: |
-        echo "Sleeping for 10"
-        sleep 10
-
+        echo Hello, world!
+        sleep 15
+        echo Goodbye!
+        java --version
+        /home/centos/apache-jmeter-5.2/bin/jmeter.sh --version
+        /home/centos/apache-jmeter-5.2/bin/jmeter.sh -n -t TestScripts/Flow_AddInts_1Step.jmx -Jthreads=80 -Jduration=60 -l Flow_AddInts_1Step.jtl
+        java -jar /home/centos/apache-jmeter-5.2/lib/CMDRunner.jar --tool Reporter --generate-csv Flow_AddInts_1Step.csv --input-jtl Flow_AddInts_1Step.jtl --plugin-type SynthesisReport
+        cat Flow_AddInts_1Step.csv
+        mkdir Flow_AddInts_1Step_report
+        /home/centos/apache-jmeter-5.2/bin/jmeter.sh -g Flow_AddInts_1Step.jtl -o Flow_AddInts_1Step_report
+    - uses: actions/upload-artifact@v3
+      with:
+          name: jmeter-results-HTML
+          path: Flow_AddInts_1Step_report/**/*
+    - uses: actions/upload-artifact@v3
+      with:
+          name: jmeter-results-CSV
+          path: Flow_AddInts_1St  
   job2:
     name: Job 2
     needs: job1
