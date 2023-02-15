@@ -6,6 +6,33 @@ on:
 jobs:
   job1:
     name: Job 1
+    runs-on: CA3S-AWS
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Run a one-line script
+      run: |
+        echo Hello, world!
+        sleep 15
+        echo Goodbye!
+        java --version
+        /home/centos/apache-jmeter-5.2/bin/jmeter.sh --version
+        /home/centos/apache-jmeter-5.2/bin/jmeter.sh -n -t TestScripts/Flow_AddInts_1Step.jmx -Jthreads=80 -Jduration=60 -l Flow_AddInts_1Step.jtl
+        java -jar /home/centos/apache-jmeter-5.2/lib/CMDRunner.jar --tool Reporter --generate-csv Flow_AddInts_1Step.csv --input-jtl Flow_AddInts_1Step.jtl --plugin-type SynthesisReport
+        cat Flow_AddInts_1Step.csv
+        mkdir Flow_AddInts_1Step_report
+        /home/centos/apache-jmeter-5.2/bin/jmeter.sh -g Flow_AddInts_1Step.jtl -o Flow_AddInts_1Step_report
+    - uses: actions/upload-artifact@v3
+      with:
+          name: jmeter-results-HTML
+          path: Flow_AddInts_1Step_report/**/*
+    - uses: actions/upload-artifact@v3
+      with:
+          name: jmeter-results-CSV
+          path: Flow_AddInts_1Step.csv  
+  job2:
+    name: Job 2
+    needs: job1
     runs-on: vadorigin1
 
     steps:
@@ -14,7 +41,7 @@ jobs:
           token: ${{ secrets.TOKEN }}
           repository: C2E/PerfUtil
           ref: origin
-    - name: Run a one-line script
+    - name: Dependant is Running
       run: |
         echo Hello, world!
         sleep 15
@@ -22,3 +49,16 @@ jobs:
         java --version
         java -cp bpt_utils.jar perf.bpt.metadata.TestMaster RUN_ID > temp.txt
         mkdir TEMP_DIRECTORY
+    - uses: actions/download-artifact@v2
+      with:
+        name: jmeter-results-CSV
+    - name: Copy file
+      run: |
+        echo Copy File!
+        cat temp.txt
+        cat temp.txt > run_id
+        echo run id: $run_id
+        sleep 15
+        java --version
+        cp Flow_AddInts_1Step.csv TEMP_DIRECTORY/Flow_AddInts_1Step.csv
+        java -DTEST_MASTER_KEY=ORIGIN_AWS_BPT -DRUN_ID=$run_id -DRETRY_ID=0 -DWORKLOAD_NAME=Flow_AddInts_1Step -DBASELINE_VERSION=10.11 -DPRODUCT_BUILD_NUMBER=ORIGIN_10.15.0.0.1106 -DINSTALLED_INT_FIXES=None -DINSTALLED_GA_FIXES=None -DBUILD_NUMBER_OTHERS=None -DINSTALLED_FIXES_OTHERS=None -DTEST_DURATION=300 -DCONCURRENT_USERS=10 -DTEMP_DIRECTORY=TEMP_DIRECTORY/ -DSERVERS_TO_BE_MONITORED=ORIGIN-NA -cp bpt_utils.jar perf.bpt.ProcessTestResu
