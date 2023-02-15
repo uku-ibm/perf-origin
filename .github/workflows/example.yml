@@ -11,6 +11,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
       with:
+          token: ${{ secrets.TOKEN }}
           repository: C2E/PerfUtil
           ref: origin
     - name: Run a one-line script
