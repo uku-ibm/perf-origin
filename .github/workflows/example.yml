@@ -56,7 +56,7 @@ jobs:
       run: |
         echo Copy File!
         cat temp.txt
-        cat temp.txt > run_id
+        run_id=$(cat temp.txt)
         echo run id: $run_id
         sleep 15
         java --version
