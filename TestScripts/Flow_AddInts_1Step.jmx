@@ -16,12 +16,12 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="tenanturl" elementType="Argument">
             <stringProp name="Argument.name">tenanturl</stringProp>
-            <stringProp name="Argument.value">originawsint2.int-aw-us1.webmethods-int.io</stringProp>
+            <stringProp name="Argument.value">originawsdev1.dev-int-aws-us.webmethods.io</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="path" elementType="Argument">
             <stringProp name="Argument.name">path</stringProp>
-            <stringProp name="Argument.value">/integration/rest/external/integration/run/development/fle7524d82061269ece652c0/Flow_AddInts_1Step</stringProp>
+            <stringProp name="Argument.value">/integration/rest/external/integration/run/development/fl6e9f87c8c8f0774fb789bd/AddInts</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="authcode" elementType="Argument">
