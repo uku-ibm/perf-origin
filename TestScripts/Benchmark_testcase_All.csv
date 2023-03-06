@@ -1,3 +1,3 @@
 testcase,concurrentusers,duration,path
-Flow_AddInts_1Step,10,300,/integration/rest/external/integration/run/development/fl69cf4fd263cd159a349acc/Flow_AddInts_1Step
-Flow_Concat_1Step,10,300,/integration/rest/external/integration/run/development/fl69cf4fd263cd159a349acc/String_Concate
+Flow_AddInts_1Step,10,60,/integration/rest/external/integration/run/development/fl69cf4fd263cd159a349acc/Flow_AddInts_1Step
+Flow_Concat_1Step,10,60,/integration/rest/external/integration/run/development/fl69cf4fd263cd159a349acc/String_Concate

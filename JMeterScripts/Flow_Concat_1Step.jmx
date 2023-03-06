@@ -21,7 +21,7 @@
           </elementProp>
           <elementProp name="path" elementType="Argument">
             <stringProp name="Argument.name">path</stringProp>
-            <stringProp name="Argument.value">${__P(path)}</stringProp>
+            <stringProp name="Argument.value">PATH</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="authcode" elementType="Argument">
