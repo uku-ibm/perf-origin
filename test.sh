@@ -1,4 +1,12 @@
 #!/bin/sh
+prerequisite(){
+        file="./origin.properties"
+        while IFS='=' read -r key value; do
+                echo "key: $key, value: $value"
+                sed -i "s*$key*$value*g" JMeterScripts/CreateEdgeServer.jmx
+        done < "$file"
+        $JMETER_HOME/bin/jmeter.sh -n -t JMeterScripts/CreateEdgeServer.jmx -Jthreads=1
+}
 prepare_jmeter_script()
 {
         echo " prepare jmeter script "
@@ -35,6 +43,7 @@ do
         workload="$testcase"_"$concurrentusers"
         echo "workload: $workload"
         cp JMeterScripts/$testcase.jmx JMeterScripts/$workload.jmx
+        prerequisite $workload
         prepare_jmeter_script $workload
         execute_jmeter_script $workload $concurrentusers $duration
 done
