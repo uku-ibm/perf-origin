@@ -38,3 +38,4 @@ do
         prepare_jmeter_script $workload
         execute_jmeter_script $workload $concurrentusers $duration
 done
+        $JMETER_HOME/bin/jmeter.sh -g TEMP_DIRECTORY/ -o report

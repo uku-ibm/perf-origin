@@ -13,3 +13,7 @@ jobs:
     - name: Run a one-line script
       run: |
         sh test.sh
+    - uses: actions/upload-artifact@v3
+      with:
+          name: jmeter-results-HTML
+          path: report/**/*
