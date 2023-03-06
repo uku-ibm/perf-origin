@@ -12,7 +12,7 @@ prepare_jmeter_script()
 execute_jmeter_script()
 {
         echo " execute jmeter script "
-        $JMETER_HOME/bin/jmeter.sh -n -t TestScripts/$1.jmx -Jthreads=$2 -Jduration=$3 -l TEMP_DIRECTORY/$1.jtl
+        $JMETER_HOME/bin/jmeter.sh -n -t JMeterScripts/$1.jmx -Jthreads=$2 -Jduration=$3 -l TEMP_DIRECTORY/$1.jtl
         java -jar $JMETER_HOME/lib/CMDRunner.jar --tool Reporter --generate-csv TEMP_DIRECTORY/$1.csv --input-jtl TEMP_DIRECTORY/$1.jtl --plugin-type SynthesisReport
 }
 
