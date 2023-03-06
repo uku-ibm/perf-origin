@@ -6,6 +6,22 @@ on:
 jobs:
   job1:
     name: Job 1
+    runs-on: vadorigin1
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Run a one-line script
+      run: |
+        sh test.sh
+        file="./origin.properties"
+        while IFS='=' read -r key value; do
+                echo "key: $key, value: $value"
+                sed -i "s*$key*$value*g" JMeterScripts/CreateEdgeServer.jmx
+        done < "$file"
+        /home/rdadmin/Softwares/apache-jmeter-5.4.1/bin/jmeter.sh -n -t JMeterScripts/CreateEdgeServer.jmx -Jthreads=1
+  job2:
+    name: Job 2
+    needs: job1
     runs-on: CA3S-AWS
 
     steps:
@@ -17,9 +33,9 @@ jobs:
       with:
           name: jmeter-results-CSV
           path: TEMP_DIRECTORY/**/*.csv
-  job2:
-    name: Job 2
-    needs: job1
+  job3:
+    name: Job 3
+    needs: job2
     runs-on: vadorigin1
     steps:
     - name: Checkout
