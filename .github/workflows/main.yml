@@ -35,8 +35,8 @@ jobs:
         path: PerfUtil
     - name: Dependant is Running
       run: |
-        cp PerfUtil/* .
-        cp perf-origin/* .
+        cp -r PerfUtil/* .
+        cp -r perf-origin/* .
         java -cp bpt_utils.jar perf.bpt.metadata.TestMaster RUN_ID > temp.txt
         mkdir TEMP_DIRECTORY
     - uses: actions/download-artifact@v2
