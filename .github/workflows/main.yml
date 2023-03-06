@@ -21,17 +21,18 @@ jobs:
     name: Job 2
     needs: job1
     runs-on: vadorigin1
-
     steps:
-    - name: Checkout Perf-origin
-      uses: actions/checkout@v3
-      
-    - name: Checkout PerfUtil
+    - name: Checkout
       uses: actions/checkout@v3
       with:
-          token: ${{ secrets.TOKEN }}
-          repository: C2E/PerfUtil
-          ref: master
+        path: main
+
+    - name: Checkout private tools
+      uses: actions/checkout@v3
+      with:
+        repository: C2E/PerfUtil
+        token: ${{ secrets.TOKEN }} # `GH_PAT` is a secret that contains your PAT
+        path: master
     - name: Dependant is Running
       run: |
         java -cp bpt_utils.jar perf.bpt.metadata.TestMaster RUN_ID > temp.txt
