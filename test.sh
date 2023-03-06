@@ -21,15 +21,12 @@ JMETER_HOME=/home/centos/apache-jmeter-5.2
 Lines=$(cat $File)
 for Line in $Lines
 do
-        echo "PRINT:: $Line"
+        echo "Test: $Line"
         variable=$Line
         if [[ $variable == *"testcase"* ]]; then
                 continue
         fi
         IFS=', ' read -r -a array <<< "$variable"
-        echo "${array[0]}"
-        echo "${array[1]}"
-        echo "${array[2]}"
         testcase=${array[0]}
         concurrentusers=${array[1]}
         duration=${array[2]}
