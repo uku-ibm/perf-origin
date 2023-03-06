@@ -7,7 +7,7 @@ prepare_jmeter_script()
                 echo "key: $key, value: $value"
                 sed -i "s*$key*$value*g" JMeterScripts/"$workload".jmx
         done < "$file"
-        sed -i "s*PATH*$PATH*g" JMeterScripts/"$workload".jmx
+        sed -i "s*PATH*$endpointpath*g" JMeterScripts/"$workload".jmx
 }
 
 execute_jmeter_script()
@@ -31,7 +31,7 @@ do
         testcase=${array[0]}
         concurrentusers=${array[1]}
         duration=${array[2]}
-        path=${array[3]}
+        endpointpath=${array[3]}
         workload="$testcase"_"$concurrentusers"
         echo "workload: $workload"
         cp JMeterScripts/$testcase.jmx JMeterScripts/$workload.jmx
