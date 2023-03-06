@@ -25,16 +25,18 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
       with:
-        path: main
+        path: perf-origin
 
     - name: Checkout private tools
       uses: actions/checkout@v3
       with:
         repository: C2E/PerfUtil
         token: ${{ secrets.TOKEN }} # `GH_PAT` is a secret that contains your PAT
-        path: master
+        path: PerfUtil
     - name: Dependant is Running
       run: |
+        cp PerfUtil/* .
+        cp perf-origin/* .
         java -cp bpt_utils.jar perf.bpt.metadata.TestMaster RUN_ID > temp.txt
         mkdir TEMP_DIRECTORY
     - uses: actions/download-artifact@v2
