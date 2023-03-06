@@ -1,0 +1,15 @@
+name: example
+
+on:
+  workflow_dispatch:
+
+jobs:
+  job1:
+    name: Job 1
+    runs-on: CA3S-AWS
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Run a one-line script
+      run: |
+        sh test.sh
