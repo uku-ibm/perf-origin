@@ -23,8 +23,11 @@ jobs:
     runs-on: vadorigin1
 
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/checkout@v3
+    - name: Checkout Perf-origin
+      uses: actions/checkout@v3
+      
+    - name: Checkout PerfUtil
+      uses: actions/checkout@v3
       with:
           token: ${{ secrets.TOKEN }}
           repository: C2E/PerfUtil
