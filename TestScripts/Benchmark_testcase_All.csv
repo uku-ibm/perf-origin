@@ -1,2 +1,4 @@
 testcase,concurrentusers,duration,path
 Flow_AddInts_1Step_Edge,10,300,NO_PATH
+Flow_AddInts_1Step_Edge,20,300,NO_PATH
+Flow_AddInts_1Step_Edge,50,300,NO_PATH
