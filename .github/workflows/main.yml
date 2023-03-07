@@ -37,6 +37,8 @@ jobs:
     needs: job2
     runs-on: vadorigin1
     steps:
+    - name: Clean the directory
+      run: rm -rf *
     - name: Checkout
       uses: actions/checkout@v3
       with:
