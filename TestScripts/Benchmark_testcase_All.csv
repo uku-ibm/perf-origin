@@ -1,4 +1,4 @@
 testcase,concurrentusers,duration,path
-Flow_AddInts_1Step_Edge,10,300,NO_PATH
-Flow_AddInts_1Step_Edge,20,300,NO_PATH
-Flow_AddInts_1Step_Edge,50,300,NO_PATH
+Flow_AddInts_1Step_Default,1,120,/integration/rest/external/integration/run/development/fla2b364989f812743daebe4/FlowService_AddInts_1Step_Default
+Sync_Flow_AddInts_1Step_Default_Cloud,1,120,/runflow/run/sync/zP35pnMon
+Sync_Flow_AddInts_1Step_Edge,1,120,/runflow/run/sync/1Hu5FkYsLi

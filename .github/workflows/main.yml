@@ -12,12 +12,13 @@ jobs:
     - uses: actions/checkout@v3
     - name: Run a one-line script
       run: |
-        file="./origin.properties"
-        while IFS='=' read -r key value; do
-                echo "key: $key, value: $value"
-                sed -i "s*$key*$value*g" JMeterScripts/CreateEdgeServer.jmx
-        done < "$file"
-        /home/rdadmin/Softwares/apache-jmeter-5.4.1/bin/jmeter.sh -n -t JMeterScripts/CreateEdgeServer.jmx -Jthreads=1
+         echo "Running on vadorigin1"
+#        file="./origin.properties"
+#        while IFS='=' read -r key value; do
+#                echo "key: $key, value: $value"
+#                sed -i "s*$key*$value*g" JMeterScripts/CreateEdgeServer.jmx
+#        done < "$file"
+#        /home/rdadmin/Softwares/apache-jmeter-5.4.1/bin/jmeter.sh -n -t JMeterScripts/CreateEdgeServer.jmx -Jthreads=1
   job2:
     name: Job 2
     needs: job1

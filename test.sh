@@ -26,7 +26,7 @@ execute_jmeter_script()
 }
 
 File="TestScripts/Benchmark_testcase_All.csv"
-JMETER_HOME=/home/centos/apache-jmeter-5.2
+JMETER_HOME=/home/centos/apache-jmeter-5.5
 Lines=$(cat $File)
 for Line in $Lines
 do
