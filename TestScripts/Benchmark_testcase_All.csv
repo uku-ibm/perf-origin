@@ -1,12 +1,7 @@
 testcase,concurrentusers,duration,path
 Flow_AddInts_1Step_Default,1,300,/integration/rest/external/integration/run/development/fla2b364989f812743daebe4/FlowService_AddInts_1Step_Default
-Flow_AddInts_1Step_Default,10,300,/integration/rest/external/integration/run/development/fla2b364989f812743daebe4/FlowService_AddInts_1Step_Default
 Flow_AddInts_1Step_Default,40,300,/integration/rest/external/integration/run/development/fla2b364989f812743daebe4/FlowService_AddInts_1Step_Default
 Sync_Flow_AddInts_1Step_Default_Cloud,1,300,/runflow/run/sync/zP35pnMon
-Sync_Flow_AddInts_1Step_Default_Cloud,10,300,/runflow/run/sync/zP35pnMon
-Sync_Flow_AddInts_1Step_Default_Cloud,20,300,/runflow/run/sync/zP35pnMon
 Sync_Flow_AddInts_1Step_Default_Cloud,40,300,/runflow/run/sync/zP35pnMon
 Sync_Flow_AddInts_1Step_Edge,1,300,/runflow/run/sync/1Hu5FkYsLi
-Sync_Flow_AddInts_1Step_Edge,10,300,/runflow/run/sync/1Hu5FkYsLi
-Sync_Flow_AddInts_1Step_Edge,20,300,/runflow/run/sync/1Hu5FkYsLi
 Sync_Flow_AddInts_1Step_Edge,40,300,/runflow/run/sync/1Hu5FkYsLi
