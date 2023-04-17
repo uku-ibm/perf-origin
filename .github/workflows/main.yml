@@ -66,5 +66,4 @@ jobs:
         cat temp.txt
         run_id=$(cat temp.txt)
         echo run id: $run_id
-        cp *.csv TEMP_DIRECTORY/
         sh store_results.sh
