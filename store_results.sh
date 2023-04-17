@@ -7,6 +7,10 @@ store_test_results()
         echo "run id: $run_id"
         echo " removing TEMP_DIRECTORY/$testcase.csv file "
         rm -rf TEMP_DIRECTORY/$testcase.csv
+        echo " File content of $workload.csv "
+        echo "_______________________________"
+        cat TEMP_DIRECTORY/$workload.csv
+        echo "_______________________________"
         sleep 1s
         echo " copying TEMP_DIRECTORY/$workload.csv TEMP_DIRECTORY/$testcase.csv "
         cp -rf TEMP_DIRECTORY/$workload.csv TEMP_DIRECTORY/$testcase.csv
