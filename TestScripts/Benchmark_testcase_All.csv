@@ -1,5 +1,7 @@
 testcase,concurrentusers,duration,path
-Flow_AddInts_1Step_Default,1,300,/integration/rest/external/integration/run/development/flc3054f7c3fd27ade60ad28/Flow_AddInts_1Step_Default
-Flow_AddInts_1Step_Default,10,300,/integration/rest/external/integration/run/development/flc3054f7c3fd27ade60ad28/Flow_AddInts_1Step_Default
-Flow_AddInts_1Step_Default,40,300,/integration/rest/external/integration/run/development/flc3054f7c3fd27ade60ad28/Flow_AddInts_1Step_Default
-Flow_AddInts_1Step_Default,60,300,/integration/rest/external/integration/run/development/flc3054f7c3fd27ade60ad28/Flow_AddInts_1Step_Default
+Flow_AddInts_1Step_Default,1,60,/integration/rest/external/integration/run/development/flb40a65fa78d4760b226c76/Flow_AddInts_1Step_Default
+Flow_AddInts_1Step_Default,10,60,/integration/rest/external/integration/run/development/flb40a65fa78d4760b226c76/Flow_AddInts_1Step_Default
+Sync_Flow_AddInts_1Step_Default_Cloud,1,60,/runflow/run/sync/1EbDGo4CNu
+Sync_Flow_AddInts_1Step_Default_Cloud,10,60,/runflow/run/sync/1EbDGo4CNu
+Sync_Flow_AddInts_1Step_Edge,1,60,/runflow/run/sync/G0oC82ZEc
+Sync_Flow_AddInts_1Step_Edge,10,60,/runflow/run/sync/G0oC82ZEc
