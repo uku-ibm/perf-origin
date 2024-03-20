@@ -19,12 +19,14 @@ jobs:
          rm -rf *
     - name: Pull the docker image and push it to the cloud.
       run: |
-         echo "TEST EXECUTION"
-         
+         echo "pull the docker image and push it to the cloud."
+         CURRENT_DIRECTORY=$PWD
+         echo "CURRENT_DIRECTORY=$PWD"
+         sh edge_docker_image.sh $CURRENT_DIRECTORY
 
     - uses: actions/upload-artifact@v3
       with:
-        name: Baseline-results-CSV
+        name: edge-docker-image
         path: .
 
 
