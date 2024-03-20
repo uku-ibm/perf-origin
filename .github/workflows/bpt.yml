@@ -17,6 +17,9 @@ jobs:
       run: |
          echo "Running on $RUNNER_CONTEXT"
          rm -rf *
+    - uses: actions/checkout@v4
+      with:
+        path: main
     - name: Pull the docker image and push it to the cloud.
       run: |
          echo "pull the docker image and push it to the cloud."
