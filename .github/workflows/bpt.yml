@@ -22,6 +22,7 @@ jobs:
         path: main
     - name: Pull the docker image and push it to the cloud.
       run: |
+         cp -r main/* .
          echo "pull the docker image and push it to the cloud."
          CURRENT_DIRECTORY=$PWD
          echo "CURRENT_DIRECTORY=$PWD"
