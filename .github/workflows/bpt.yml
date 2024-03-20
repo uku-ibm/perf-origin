@@ -1,0 +1,31 @@
+name: bpt
+on:
+  workflow_dispatch:
+env: 
+  TENANT_USERNAME: ${{secrets.TENANT_USERNAME}}
+  TENANT_PASSWORD: ${{secrets.TENANT_PASSWORD}}
+  AUTH_CODE: ${{secrets.AUTH_CODE}}
+jobs:
+  setup:
+    name: Checkout and fetch the baseline
+    runs-on: vadorigin1
+
+    steps:
+    - name: Remove the existing files
+      env:
+        RUNNER_CONTEXT: ${{ toJson(runner) }}
+      run: |
+         echo "Running on $RUNNER_CONTEXT"
+         rm -rf *
+    - name: Pull the docker image and push it to the cloud.
+      run: |
+         echo "TEST EXECUTION"
+         
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: Baseline-results-CSV
+        path: .
+
+
+    
