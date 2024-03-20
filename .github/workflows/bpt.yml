@@ -26,12 +26,33 @@ jobs:
          echo "pull the docker image and push it to the cloud."
          CURRENT_DIRECTORY=$PWD
          echo "CURRENT_DIRECTORY=$PWD"
-         sh edge_docker_image.sh $CURRENT_DIRECTORY
+         sh edge_docker_image.sh pull_edge_runtime_image $CURRENT_DIRECTORY
 
     - uses: actions/upload-artifact@v3
       with:
         name: edge-docker-image
         path: .
 
+  edge-runtime-setup:
+    name: Setup edge runtime
+    needs: setup
+    runs-on: CA3S-AWS-2
 
-    
+    steps:
+    - name: Download the edge server and start the edge server
+      env: 
+        RUNNER_CONTEXT: ${{ toJson(runner) }} 
+      run: |
+         echo "Downloading the edge server."
+         rm -rf *
+    - uses: actions/download-artifact@v3
+      with:
+        name: edge-docker-image
+        path: .
+    - name: load the docker image
+      run: |
+         cp -r main/* .
+         echo "Load the docker image."
+         CURRENT_DIRECTORY=$PWD
+         echo "CURRENT_DIRECTORY=$PWD"
+         sh edge_docker_image.sh load_edge_runtime_image $CURRENT_DIRECTORY
