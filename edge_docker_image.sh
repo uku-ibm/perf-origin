@@ -107,8 +107,8 @@ fetch_tokens_from_tenant(){
     CSRF=`cat token.json | grep -oP '(?<="csrf":")[^"]*'`
 }
 
-TENANT_USERNAME=$1
-TENANT_PASSWORD=$2
+TENANT_USERNAME=$2
+TENANT_PASSWORD=$3
 source ./origin.properties # CLOUD_NAME, REMOTE_EDGE_SERVER_NAME will be picked up as environment variables from ./origin.properties file
 echo "CLOUD_NAME: $CLOUD_NAME"
 echo "REMOTE_EDGE_SERVER_NAME: $REMOTE_EDGE_SERVER_NAME"
@@ -126,7 +126,7 @@ if [[ $1 == *"delete_existing_edge_runtime_from_tenant"* ]]; then
         fetch_tokens_from_tenant
         delete_existing_edge_runtime_from_tenant
 fi
-if [[ $1 == *"configure_edge_runtime_on_tenant"* ]]; then
+if [[ $1 == *"configure_edge_runtime_to_tenant"* ]]; then
         fetch_tokens_from_tenant
-        configure_edge_runtime_on_tenant 
+        configure_edge_runtime_to_tenant 
 fi

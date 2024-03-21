@@ -83,7 +83,7 @@ jobs:
          echo "CURRENT_DIRECTORY=$PWD"
          sh edge_docker_image.sh load_edge_runtime_image $CURRENT_DIRECTORY
          sh edge_docker_image.sh delete_existing_edge_runtime_from_tenant $TENANT_USERNAME $TENANT_PASSWORD
-         sh edge_docker_image.sh configure_edge_runtime_on_tenant $TENANT_USERNAME $TENANT_PASSWORD
+         sh edge_docker_image.sh configure_edge_runtime_to_tenant $TENANT_USERNAME $TENANT_PASSWORD
     
   execute:
     name: Execute the tests and compare with baseline
