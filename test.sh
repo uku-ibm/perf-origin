@@ -6,6 +6,7 @@ prerequisite(){
        #         sed -i "s*$key*$value*g" JMeterScripts/CreateEdgeServer.jmx
        # done < "$file"
        # $JMETER_HOME/bin/jmeter.sh -n -t JMeterScripts/CreateEdgeServer.jmx -Jthreads=1
+       echo "prerequisite"
 }
 prepare_jmeter_script()
 {
