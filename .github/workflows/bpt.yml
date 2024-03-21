@@ -78,7 +78,6 @@ jobs:
         path: .
     - name: load the docker image
       run: |
-         cp -r main/* .
          echo "Load the docker image."
          CURRENT_DIRECTORY=$PWD
          echo "CURRENT_DIRECTORY=$PWD"
