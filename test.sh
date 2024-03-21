@@ -25,13 +25,13 @@ prepare_jmeter_script()
         COOKIE=`cat token.json | grep -oP '(?<="cookie":")[^"]*'`
         CSRF=`cat token.json | grep -oP '(?<="csrf":")[^"]*'`
         #https://originawsint2.int-aw-us1.webmethods-int.io/enterprise/v1/projects?limit=19&skip=0&q=PerformanceTest
-        PROJECT_ID=$(curl -H "authtoken:$AUTH_TOKEN" -H "cookie:$COOKIE" -H "X-csrf-token:$CSRF" "https://$CLOUD_NAME/enterprise/v1/projects?limit=19&skip=0&q=$PROJECT_NAME" | grep -oP '(?<="ic_project_name":")[^"]*')
+        PROJECT_ID=$(curl -s -H "authtoken:$AUTH_TOKEN" -H "cookie:$COOKIE" -H "X-csrf-token:$CSRF" "https://$CLOUD_NAME/enterprise/v1/projects?limit=19&skip=0&q=$PROJECT_NAME" | grep -oP '(?<="ic_project_name":")[^"]*')
         if [ -z "$PROJECT_ID" ]; then
             echo "PROJECT_ID is empty or null"
         else
             echo "PROJECT_ID: $PROJECT_ID"
         fi
-        AGENT_ID=$(curl -H "authtoken:$AUTH_TOKEN" -H "cookie:$COOKIE" -H "X-csrf-token:$CSRF" "https://$CLOUD_NAME/integration/rest/edge/runtimes?page=1&limit=19&searchKey=$REMOTE_EDGE_SERVER_NAME" | grep -oP '(?<="agentID":")[^"]*')
+        AGENT_ID=$(curl -s -H "authtoken:$AUTH_TOKEN" -H "cookie:$COOKIE" -H "X-csrf-token:$CSRF" "https://$CLOUD_NAME/integration/rest/edge/runtimes?page=1&limit=19&searchKey=$REMOTE_EDGE_SERVER_NAME" | grep -oP '(?<="agentID":")[^"]*')
         if [ -z "$AGENT_ID" ]; then
             echo "AGENT_ID is empty or null"
         else
