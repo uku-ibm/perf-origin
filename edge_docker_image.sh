@@ -26,7 +26,7 @@ delete_existing_edge_runtime_from_tenant(){
         if [ -z "$agentID" ]; then
             echo "AgentID is empty or null"
         else
-            echo "The agent ID: $agentID"
+            echo "AGENT_ID (Begin):$agentID(end)"
             echo "Deleting the perftest edge server from the tenant with agent ID: $agentID"
             response=""
             echo "curl -s -X DELETE -H "authtoken:$AUTH_TOKEN""

@@ -29,13 +29,13 @@ prepare_jmeter_script()
         if [ -z "$PROJECT_ID" ]; then
             echo "PROJECT_ID is empty or null"
         else
-            echo "PROJECT_ID: $PROJECT_ID"
+            echo "PROJECT_ID (Begin):$PROJECT_ID(end)"
         fi
         AGENT_ID=$(curl -s -H "authtoken:$AUTH_TOKEN" -H "cookie:$COOKIE" -H "X-csrf-token:$CSRF" "https://$CLOUD_NAME/integration/rest/edge/runtimes?page=1&limit=19&searchKey=$REMOTE_EDGE_SERVER_NAME" | grep -oP '(?<="agentID":")[^"]*')
         if [ -z "$AGENT_ID" ]; then
             echo "AGENT_ID is empty or null"
         else
-            echo "AGENT_ID: $AGENT_ID"
+            echo "AGENT_ID (Begin):$agentID(end)"
         fi
         
         echo "REQUEST 1"
