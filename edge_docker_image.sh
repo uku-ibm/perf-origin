@@ -16,7 +16,7 @@ load_edge_runtime_image(){
 }
 
 delete_existing_edge_runtime_from_tenant(){
-    echo "Search for perftest edge server from the tenant"
+    echo "Search for $REMOTE_EDGE_SERVER_NAME edge server from the tenant"
     response=$(curl -s -H "authtoken:$AUTH_TOKEN" -H "cookie:$COOKIE" -H "X-csrf-token:$CSRF" "https://$CLOUD_NAME/integration/rest/edge/runtimes?page=1&limit=19&searchKey=$REMOTE_EDGE_SERVER_NAME")
     echo "RESPONSE: $response"
     if [ -z "$response" ]; then
@@ -32,21 +32,19 @@ delete_existing_edge_runtime_from_tenant(){
             echo "curl -s -X DELETE -H "authtoken:$AUTH_TOKEN""
             response=$(curl -s -X DELETE -H "authtoken:$AUTH_TOKEN" -H "cookie:$COOKIE" -H "X-csrf-token:$CSRF" "https://$CLOUD_NAME/integration/rest/edge/runtimes/$agentID/deregister?force=true")
             echo "RESPONE: $response"
-            # stop all running containers
-            echo '####################################################'
-            echo 'Stopping running containers (if available)...'
-            echo '####################################################'
-            docker stop $(docker ps -aq)
-
-            # remove all stopped containers
-            echo '####################################################'
-            echo 'Removing containers ..'
-            echo '####################################################'
-            docker rm $(docker ps -aq)
         fi
     fi
+    # stop all running containers
+    echo '####################################################'
+    echo 'Stopping running containers (if available)...'
+    echo '####################################################'
+    docker stop $(docker ps -aq)
 
-
+    # remove all stopped containers
+    echo '####################################################'
+    echo 'Removing containers ..'
+    echo '####################################################'
+    docker rm $(docker ps -aq)
 }
 verify_edge_runtime_on_tenant_runtime_dashboard(){
     echo "verify edge runtime on tenant's runtime dashboard"
