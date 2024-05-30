@@ -1,6 +1,2 @@
 testcase,concurrentusers,duration
-Flow_Edge_Response_1KB,1,60
-Flow_Edge_Response_5KB,1,60
-Flow_Edge_Response_10KB,1,60
-Flow_Edge_Response_500KB,1,60
-Flow_Edge_Response_1MB,1,60
+Flow_Edge_Response_1KB,1,300
