@@ -81,7 +81,7 @@
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.contentEncoding">ISO-8859-1</stringProp>
-          <stringProp name="HTTPSampler.path">/integration/rest/origin/flow/execute/${projectID}/VaryingPayload?agentGroup=default&amp;agentID=${agentID}</stringProp>
+          <stringProp name="HTTPSampler.path">/integration/rest/edge/flow/execute/${projectID}/VaryingPayload?agentGroup=default&amp;agentID=${agentID}</stringProp>
           <stringProp name="HTTPSampler.method">POST</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
