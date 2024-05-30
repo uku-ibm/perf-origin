@@ -81,7 +81,7 @@ source ./origin.properties # CLOUD_NAME, REMOTE_EDGE_SERVER_NAME will be picked 
 echo "CLOUD_NAME: $CLOUD_NAME"
 echo "REMOTE_EDGE_SERVER_NAME: $REMOTE_EDGE_SERVER_NAME"
 File="Tests/Benchmark_testcase_All.csv"
-JMETER_HOME=/home/centos/apache-jmeter-5.5
+JMETER_HOME=/home/ec2-user/apache-jmeter-5.5
 TEMP_DIRECTORY=$1
 TENANT_USERNAME=$2
 TENANT_PASSWORD=$3
