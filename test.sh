@@ -31,11 +31,17 @@ prepare_jmeter_script()
         else
             echo "PROJECT_ID (Begin):$PROJECT_ID(end)"
         fi
+        sleep 5s
+        echo "Fetching AGENT_ID"
         AGENT_ID=$(curl -s -H "authtoken:$AUTH_TOKEN" -H "cookie:$COOKIE" -H "X-csrf-token:$CSRF" "https://$CLOUD_NAME/integration/rest/edge/runtimes?page=1&limit=19&searchKey=$REMOTE_EDGE_SERVER_NAME" | grep -oP '(?<="agentID":")[^"]*')
+        echo "AGENT_ID: $AGENT_ID"
         if [ -z "$AGENT_ID" ]; then
             echo "AGENT_ID is empty or null"
         else
-            echo "AGENT_ID (Begin):$agentID(end)"
+            echo "Fetching AGENT_ID again"
+            AGENT_ID=$(curl -s -H "authtoken:$AUTH_TOKEN" -H "cookie:$COOKIE" -H "X-csrf-token:$CSRF" "https://$CLOUD_NAME/integration/rest/edge/runtimes?page=1&limit=19&searchKey=$REMOTE_EDGE_SERVER_NAME" | grep -oP '(?<="agentID":")[^"]*' | head -1)
+            echo "AGENT_ID: $AGENT_ID"
+            echo "AGENT_ID (Begin):$AGENT_ID(end)"
         fi
         
         echo "REQUEST 1"
