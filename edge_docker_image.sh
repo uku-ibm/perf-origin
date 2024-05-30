@@ -22,7 +22,7 @@ delete_existing_edge_runtime_from_tenant(){
     if [ -z "$response" ]; then
         echo "The response is empty or null"
     else
-        agentID=$(echo "$response" | grep -oP '(?<="agentID":")[^"]*')
+        agentID=$(echo "$response" | grep -oP '(?<="agentID":")[^"]*' | head -1)
         if [ -z "$agentID" ]; then
             echo "AgentID is empty or null"
         else
