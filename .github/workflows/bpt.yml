@@ -8,7 +8,7 @@ env:
 jobs:
   setup:
     name: Checkout and fetch the baseline
-    runs-on: vadorigin1
+    runs-on: vmperfsiqa
 
     steps:
     - name: Remove the existing files
@@ -63,7 +63,7 @@ jobs:
   edge-runtime-setup:
     name: Setup edge runtime
     needs: setup
-    runs-on: CA3S-AWS-2
+    runs-on: Origin_Perf2
 
     steps:
     - name: Download the edge server and start the edge server
@@ -88,7 +88,7 @@ jobs:
   execute:
     name: Execute the tests and compare with baseline
     needs: edge-runtime-setup
-    runs-on: CA3S-AWS-3
+    runs-on: Origin_Perf1
 
     steps:
     - name: Remove the existing files
@@ -116,7 +116,7 @@ jobs:
   store:
     name: Store the results in Database
     needs: execute
-    runs-on: vadorigin1
+    runs-on: vmperfsiqa
     steps:
       - name: Remove the existing files
         env:
