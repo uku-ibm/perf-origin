@@ -18,8 +18,6 @@ jobs:
          rm -rf *    
     - name: Execute the tests
       run: |
-         CURRENT_DIRECTORY=$PWD
          TEMP_DIRECTORY=$PWD/TEMP_DIRECTORY
-         echo "CURRENT_DIRECTORY: $CURRENT_DIRECTORY"
          echo "TEMP_DIRECTORY: $TEMP_DIRECTORY"
          sh test.sh $TEMP_DIRECTORY $TENANT_USERNAME $TENANT_PASSWORD
