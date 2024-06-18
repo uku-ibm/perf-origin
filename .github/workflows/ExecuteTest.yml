@@ -19,5 +19,6 @@ jobs:
     - name: Execute the tests
       run: |
          TEMP_DIRECTORY=$PWD/TEMP_DIRECTORY
+         CURRENT_DIRECTORY=$PWD
          echo "TEMP_DIRECTORY: $TEMP_DIRECTORY"
          sh test.sh $TEMP_DIRECTORY $TENANT_USERNAME $TENANT_PASSWORD
