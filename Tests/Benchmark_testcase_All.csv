@@ -1,2 +1,4 @@
 testcase,concurrentusers,duration
 UA1_2_1KB_1C,1,300
+UA1_2_1KB_1C,5,300
+UA1_2_1KB_1C,10,300
