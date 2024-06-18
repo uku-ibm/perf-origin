@@ -104,6 +104,6 @@ do
         workload="$testcase"_"$concurrentusers"
         echo "workload: $workload"
         cp JMeterScripts/$testcase.jmx JMeterScripts/$workload.jmx
-        #prepare_jmeter_script $workload
+        prepare_jmeter_script $workload
         execute_jmeter_script $testcase $workload $concurrentusers $duration $TEMP_DIRECTORY
 done
