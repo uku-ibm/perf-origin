@@ -5,11 +5,8 @@ env:
   TENANT_USERNAME: ${{secrets.TENANT_USERNAME}}
   TENANT_PASSWORD: ${{secrets.TENANT_PASSWORD}}
   AUTH_CODE: ${{secrets.AUTH_CODE}}
-jobs:  
-  
+jobs:   
   execute:
-    name: Execute the tests and compare with baseline
-    needs: edge-runtime-setup
     runs-on: Origin_Perf1
 
     steps:
@@ -30,5 +27,3 @@ jobs:
          echo "CURRENT_DIRECTORY: $CURRENT_DIRECTORY"
          echo "TEMP_DIRECTORY: $TEMP_DIRECTORY"
          sh test.sh $TEMP_DIRECTORY $TENANT_USERNAME $TENANT_PASSWORD
-
-  
