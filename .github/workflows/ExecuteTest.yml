@@ -1,0 +1,34 @@
+name: ExecuteTest
+on:
+  workflow_dispatch:
+env: 
+  TENANT_USERNAME: ${{secrets.TENANT_USERNAME}}
+  TENANT_PASSWORD: ${{secrets.TENANT_PASSWORD}}
+  AUTH_CODE: ${{secrets.AUTH_CODE}}
+jobs:  
+  
+  execute:
+    name: Execute the tests and compare with baseline
+    needs: edge-runtime-setup
+    runs-on: Origin_Perf1
+
+    steps:
+    - name: Remove the existing files
+      env:
+        RUNNER_CONTEXT: ${{ toJson(runner) }}
+      run: |
+         echo "Running on $RUNNER_CONTEXT"
+         rm -rf *
+    - uses: actions/download-artifact@v3
+      with:
+        name: Baseline-results-CSV
+        path: .
+    - name: Execute the tests
+      run: |
+         CURRENT_DIRECTORY=$PWD
+         TEMP_DIRECTORY=$PWD/TEMP_DIRECTORY
+         echo "CURRENT_DIRECTORY: $CURRENT_DIRECTORY"
+         echo "TEMP_DIRECTORY: $TEMP_DIRECTORY"
+         sh test.sh $TEMP_DIRECTORY $TENANT_USERNAME $TENANT_PASSWORD
+
+  
