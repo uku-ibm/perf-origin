@@ -15,11 +15,7 @@ jobs:
         RUNNER_CONTEXT: ${{ toJson(runner) }}
       run: |
          echo "Running on $RUNNER_CONTEXT"
-         rm -rf *
-    - uses: actions/download-artifact@v3
-      with:
-        name: Baseline-results-CSV
-        path: .
+         rm -rf *    
     - name: Execute the tests
       run: |
          CURRENT_DIRECTORY=$PWD
