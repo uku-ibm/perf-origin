@@ -73,7 +73,7 @@ execute_jmeter_script()
         $JMETER_HOME/bin/jmeter.sh -n -t JMeterScripts/$2.jmx -Jthreads=$3 -Jduration=$4 -l TEMP_DIRECTORY/$1.jtl
         java -jar $JMETER_HOME/lib/cmdrunner-2.2.jar --tool Reporter --generate-csv TEMP_DIRECTORY/$1.csv --input-jtl TEMP_DIRECTORY/$1.jtl --plugin-type SynthesisReport
         cat TEMP_DIRECTORY/$testcase.csv
-        rm -f TEMP_DIRECTORY/$1.jtl
+        #rm -f TEMP_DIRECTORY/$1.jtl
         java -DWORKLOAD_NAME=$1 -DTEMP_DIRECTORY=$5/ -cp bpt_utils.jar perf.bpt.util.CompareBaseline
 }
 
