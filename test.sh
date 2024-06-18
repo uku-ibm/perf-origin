@@ -60,6 +60,9 @@ prepare_jmeter_script()
         RESPONSE_OUTPUT=$(curl -s -X POST -H "Content-Type: application/json" -H "authtoken:$AUTH_TOKEN" -H "cookie:$COOKIE" -H "X-csrf-token:$CSRF" -d "{\"apiEndPoint\":\"/package/PerformanceTestsProject\",\"agentID\":\"$AGENT_ID\",\"agentGroup\":\"default\",\"httpMethod\":\"GET\"}" "https://$CLOUD_NAME/integration/rest/edge/flow/admin-proxy")
         echo "REQUEST 4, RESPONSE: $RESPONSE_OUTPUT"
         
+        echo "AUTH_TOKEN-----$AUTH_TOKEN"
+        echo "COOKIE-----$COOKIE"
+        echo "CSRF-----$CSRF"
         sed -i "s*AGENT_ID*$AGENT_ID*g" JMeterScripts/"$workload".jmx
         sed -i "s*PROJECT_ID*$PROJECT_ID*g" JMeterScripts/"$workload".jmx
         sed -i "s*AUTH_TOKEN*$AUTH_TOKEN*g" JMeterScripts/"$workload".jmx
@@ -73,7 +76,7 @@ execute_jmeter_script()
         $JMETER_HOME/bin/jmeter.sh -n -t JMeterScripts/$2.jmx -Jthreads=$3 -Jduration=$4 -l TEMP_DIRECTORY/$1.jtl
         java -jar $JMETER_HOME/lib/cmdrunner-2.2.jar --tool Reporter --generate-csv TEMP_DIRECTORY/$1.csv --input-jtl TEMP_DIRECTORY/$1.jtl --plugin-type SynthesisReport
         cat TEMP_DIRECTORY/$testcase.csv
-        #rm -f TEMP_DIRECTORY/$1.jtl
+        rm -f TEMP_DIRECTORY/$1.jtl
         java -DWORKLOAD_NAME=$1 -DTEMP_DIRECTORY=$5/ -cp bpt_utils.jar perf.bpt.util.CompareBaseline
 }
 
