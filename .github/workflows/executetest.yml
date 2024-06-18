@@ -10,15 +10,10 @@ jobs:
     runs-on: Origin_Perf1
 
     steps:
-    - name: Remove the existing files
-      env:
-        RUNNER_CONTEXT: ${{ toJson(runner) }}
-      run: |
-         echo "Running on $RUNNER_CONTEXT"
-         rm -rf *    
     - name: Execute the tests
       run: |
-         TEMP_DIRECTORY=$PWD/TEMP_DIRECTORY
          CURRENT_DIRECTORY=$PWD
+         TEMP_DIRECTORY=$PWD/TEMP_DIRECTORY
+         echo "CURRENT_DIRECTORY: $CURRENT_DIRECTORY"
          echo "TEMP_DIRECTORY: $TEMP_DIRECTORY"
          sh test.sh $TEMP_DIRECTORY $TENANT_USERNAME $TENANT_PASSWORD
