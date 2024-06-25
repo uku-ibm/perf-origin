@@ -53,11 +53,11 @@ prepare_jmeter_script()
         echo "REQUEST 2, RESPONSE: $RESPONSE_OUTPUT"
         
         echo "REQUEST 3"
-        RESPONSE_OUTPUT=$(curl -s -X POST -H "Content-Type: application/json" -H "authtoken:$AUTH_TOKEN" -H "cookie:$COOKIE" -H "X-csrf-token:$CSRF" -d "{\"apiEndPoint\":\"/package/PerformanceTestsProject\",\"agentID\":\"default\",\"agentGroup\":\"default\",\"httpMethod\":\"GET\"}" "https://$CLOUD_NAME/integration/rest/edge/flow/admin-proxy")
+        RESPONSE_OUTPUT=$(curl -s -X POST -H "Content-Type: application/json" -H "authtoken:$AUTH_TOKEN" -H "cookie:$COOKIE" -H "X-csrf-token:$CSRF" -d "{\"apiEndPoint\":\"/package/PerformanceTestProject\",\"agentID\":\"default\",\"agentGroup\":\"default\",\"httpMethod\":\"GET\"}" "https://$CLOUD_NAME/integration/rest/edge/flow/admin-proxy")
         echo "REQUEST 3, RESPONSE: $RESPONSE_OUTPUT"
         
         echo "REQUEST 4"
-        RESPONSE_OUTPUT=$(curl -s -X POST -H "Content-Type: application/json" -H "authtoken:$AUTH_TOKEN" -H "cookie:$COOKIE" -H "X-csrf-token:$CSRF" -d "{\"apiEndPoint\":\"/package/PerformanceTestsProject\",\"agentID\":\"$AGENT_ID\",\"agentGroup\":\"default\",\"httpMethod\":\"GET\"}" "https://$CLOUD_NAME/integration/rest/edge/flow/admin-proxy")
+        RESPONSE_OUTPUT=$(curl -s -X POST -H "Content-Type: application/json" -H "authtoken:$AUTH_TOKEN" -H "cookie:$COOKIE" -H "X-csrf-token:$CSRF" -d "{\"apiEndPoint\":\"/package/PerformanceTestProject\",\"agentID\":\"$AGENT_ID\",\"agentGroup\":\"default\",\"httpMethod\":\"GET\"}" "https://$CLOUD_NAME/integration/rest/edge/flow/admin-proxy")
         echo "REQUEST 4, RESPONSE: $RESPONSE_OUTPUT"
         
         echo "AUTH_TOKEN-----$AUTH_TOKEN"
