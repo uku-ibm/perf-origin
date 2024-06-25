@@ -45,7 +45,7 @@ prepare_jmeter_script()
         fi
         
         echo "REQUEST 1"
-        RESPONSE_OUTPUT=$(curl -s -X POST -H "Content-Type: application/json" -H "authtoken:$AUTH_TOKEN" -H "cookie:$COOKIE" -H "X-csrf-token:$CSRF" -d "{\"agentID\":\"default\",\"agentGroup\":\"Default\",\"apiEndPoint\":\"/scaffolding/agentManifest\",\"httpMethod\":\"POST\",\"input\":{\"agentId\":\"$AGENT_ID\",\"tags\":\"VaryingPayload\",\"services\":[{\"serviceName\":\"project.performancetests.integrations:VaryingPayload\"}]}}" "https://$CLOUD_NAME/integration/rest/edge/flow/admin-proxy")
+        RESPONSE_OUTPUT=$(curl -s -X POST -H "Content-Type: application/json" -H "authtoken:$AUTH_TOKEN" -H "cookie:$COOKIE" -H "X-csrf-token:$CSRF" -d "{\"agentID\":\"default\",\"agentGroup\":\"Default\",\"apiEndPoint\":\"/scaffolding/agentManifest\",\"httpMethod\":\"POST\",\"input\":{\"agentId\":\"$AGENT_ID\",\"tags\":\"VaryingPayload\",\"services\":[{\"serviceName\":\"project.performancetest.integrations:VaryingPayload\"}]}}" "https://$CLOUD_NAME/integration/rest/edge/flow/admin-proxy")
         echo "REQUEST 1, RESPONSE: $RESPONSE_OUTPUT"
         
         echo "REQUEST 2"
