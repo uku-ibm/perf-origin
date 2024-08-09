@@ -1,11 +1,5 @@
 testcase,concurrentusers,duration
-RAD_Edge_Response_1KB,1,300
-RAD_Edge_Response_1KB,10,300
-RAD_Edge_Response_5KB,1,300
-RAD_Edge_Response_5KB,10,300
-RAD_Edge_Response_10KB,1,300
-RAD_Edge_Response_10KB,10,300
-RAD_Edge_Response_500KB,1,300
-RAD_Edge_Response_500KB,10,300
-RAD_Edge_Response_1MB,1,300
-RAD_Edge_Response_1MB,10,300
+Flow_Edge_Response_1KB,20,300
+Flow_Edge_Response_10KB,20,300
+Flow_Edge_Response_20KB,20,300
+Flow_Edge_Response_1MB,20,300
