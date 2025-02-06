@@ -43,7 +43,7 @@ jobs:
          RUN_ID=`java -cp bpt_utils.jar perf.bpt.metadata.TestMaster RUN_ID`
          echo "RUN_ID: $RUN_ID"
          sed -i "s*RUN_ID_VALUE*$RUN_ID*g" $CURRENT_DIRECTORY/origin.properties
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: Baseline-results-CSV
         path: .    
@@ -55,7 +55,7 @@ jobs:
          echo "CURRENT_DIRECTORY=$PWD"
          sh edge_docker_image.sh pull_edge_runtime_image $CURRENT_DIRECTORY
 
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: edge-docker-image
         path: .
@@ -72,7 +72,7 @@ jobs:
       run: |
          echo "Downloading the edge server."
          rm -rf *
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: edge-docker-image
         path: .
@@ -97,7 +97,7 @@ jobs:
       run: |
          echo "Running on $RUNNER_CONTEXT"
          rm -rf *
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: Baseline-results-CSV
         path: .
@@ -108,7 +108,7 @@ jobs:
          echo "CURRENT_DIRECTORY: $CURRENT_DIRECTORY"
          echo "TEMP_DIRECTORY: $TEMP_DIRECTORY"
          sh test.sh $TEMP_DIRECTORY $TENANT_USERNAME $TENANT_PASSWORD
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: Test-results-CSV
         path: .
@@ -124,7 +124,7 @@ jobs:
         run: |
              echo "Running on $RUNNER_CONTEXT"
              rm -rf *
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: Test-results-CSV
           path: .
