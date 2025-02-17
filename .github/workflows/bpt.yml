@@ -23,7 +23,7 @@ jobs:
     - name: Checkout PerfUtils
       uses: actions/checkout@v4
       with:
-        repository: C2E/PerfUtil
+        repository: kuma1988/PerfUtil
         token: ${{ secrets.TOKEN }} # `GH_PAT` is a secret that contains your PAT
         ref: github_actions
         path: PerfUtil
