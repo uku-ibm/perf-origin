@@ -22,7 +22,7 @@
       </ThreadGroup>
       <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP Request" enabled="true">
-          <stringProp name="HTTPSampler.domain">CLOUD_NAME</stringProp>
+          <stringProp name="HTTPSampler.domain">awinttenant7.int-aw-us1.webmethods-int.io</stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.path">/integration/rest/oAuth/authorize</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -107,7 +107,7 @@
         </ResultCollector>
         <hashTree/>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP Request" enabled="true">
-          <stringProp name="HTTPSampler.domain">CLOUD_NAME</stringProp>
+          <stringProp name="HTTPSampler.domain">awinttenant7.int-aw-us1.webmethods-int.io</stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.path">/integration/rest/oAuth/approve</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -258,8 +258,8 @@
         <hashTree/>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="awinttenant7">
-        <stringProp name="ThreadGroup.num_threads">${__P(threads)}</stringProp>
-        <stringProp name="ThreadGroup.duration">${__P(duration)}</stringProp>
+        <stringProp name="ThreadGroup.num_threads">100</stringProp>
+        <stringProp name="ThreadGroup.duration">${__P(duration,300)}</stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <boolProp name="ThreadGroup.scheduler">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
@@ -287,7 +287,7 @@
         </HeaderManager>
         <hashTree/>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP Request" enabled="false">
-          <stringProp name="HTTPSampler.domain">CLOUD_NAME</stringProp>
+          <stringProp name="HTTPSampler.domain">originawsint2.int-aw-us1.webmethods-int.io</stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.path">/integration/rest/oAuth/getToken</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
