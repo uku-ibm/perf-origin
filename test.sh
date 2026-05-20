@@ -16,7 +16,7 @@ prepare_jmeter_script()
                 echo "key: $key, value: $value"
                 sed -i "s*$key*$value*g" JMeterScripts/"$workload".jmx
         done < "$file"
-        #sed -i "s*PATH*$endpointpath*g" JMeterScripts/"$workload".jmx
+        sed -i "s*PATH*$endpointpath*g" JMeterScripts/"$workload".jmx
         echo "Fetch auth, cookie, X-csrf-token"
         rm -f token.json
         curl -s -u ${TENANT_USERNAME}:${TENANT_PASSWORD} https://$CLOUD_NAME/enterprise/v1/user/token > token.json
@@ -63,11 +63,16 @@ prepare_jmeter_script()
         echo "AUTH_TOKEN-----$AUTH_TOKEN"
         echo "COOKIE-----$COOKIE"
         echo "CSRF-----$CSRF"
+        
+        # Generate Bearer token if needed (for OAuth-based scripts)
+        BEARER_TOKEN=$AUTH_TOKEN
+        
         sed -i "s*AGENT_ID*$AGENT_ID*g" JMeterScripts/"$workload".jmx
         sed -i "s*PROJECT_ID*$PROJECT_ID*g" JMeterScripts/"$workload".jmx
         sed -i "s*AUTH_TOKEN*$AUTH_TOKEN*g" JMeterScripts/"$workload".jmx
         sed -i "s*COOKIE*$COOKIE*g" JMeterScripts/"$workload".jmx
         sed -i "s*CSRF*$CSRF*g" JMeterScripts/"$workload".jmx
+        sed -i "s*BEARER*$BEARER_TOKEN*g" JMeterScripts/"$workload".jmx
 }
 
 execute_jmeter_script()
