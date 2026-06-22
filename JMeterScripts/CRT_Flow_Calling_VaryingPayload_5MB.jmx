@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
   <hashTree>
-    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="ERT_Final_Working_Payload_Test">
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="CRT_Final_Working_Payload_Test">
       <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments">
         <collectionProp name="Arguments.arguments">
           <elementProp name="cloudName" elementType="Argument">
@@ -11,7 +11,7 @@
           </elementProp>
           <elementProp name="path" elementType="Argument">
             <stringProp name="Argument.name">path</stringProp>
-            <stringProp name="Argument.value">/integration/rest/external/integration/run/development/fl6e9b7a562f19476ab71507ff3e92dceb/ERT_FlowCalling_Dada_VaryingPayload</stringProp>
+            <stringProp name="Argument.value">/integration/rest/external/integration/run/development/fl6e9b7a562f19476ab71507ff3e92dceb/CRT_FlowCalling_Dada_VaryingPayload</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="bearer" elementType="Argument">
@@ -26,7 +26,7 @@
           </elementProp>
           <elementProp name="payloadFile" elementType="Argument">
             <stringProp name="Argument.name">payloadFile</stringProp>
-            <stringProp name="Argument.value">/home/azureuser/payload/payload1MB.txt</stringProp>
+            <stringProp name="Argument.value">/home/azureuser/payload/payload5MB.txt</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>

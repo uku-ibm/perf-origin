@@ -1,40 +1,35 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
   <hashTree>
-    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="ERT_Final_Working_Payload_Test">
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Origin_ERT02_SubtractInt_Test">
       <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments">
         <collectionProp name="Arguments.arguments">
-          <elementProp name="cloudName" elementType="Argument">
-            <stringProp name="Argument.name">cloudName</stringProp>
-            <stringProp name="Argument.value">prod731523.m-yqb-c1.int.ipaas.dev.automation.ibm.com</stringProp>
+          <elementProp name="host" elementType="Argument">
+            <stringProp name="Argument.name">host</stringProp>
+            <stringProp name="Argument.value">prod147077.m-yqb-c1.int.ipaas.test.automation.ibm.com</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="path" elementType="Argument">
             <stringProp name="Argument.name">path</stringProp>
-            <stringProp name="Argument.value">/integration/rest/external/integration/run/development/fl6e9b7a562f19476ab71507ff3e92dceb/ERT_FlowCalling_Dada_VaryingPayload</stringProp>
+            <stringProp name="Argument.value">/integration/rest/external/integration/run/development/fl7a7dea5ea038460b9243ab0d469462ef/subInvocation_ERT2</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
-          <elementProp name="bearer" elementType="Argument">
-            <stringProp name="Argument.name">bearer</stringProp>
-            <stringProp name="Argument.value">e3378fc99c6e480eb3c97064dbe91391222741a7151345929b23b552513c64fc</stringProp>
+          <elementProp name="bearerToken" elementType="Argument">
+            <stringProp name="Argument.name">bearerToken</stringProp>
+            <stringProp name="Argument.value">4f2d36eb5a41468199b3afe3a9a4a0fe229dfef957184afb8ef7c88ea3285d0d</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="apiKey" elementType="Argument">
             <stringProp name="Argument.name">apiKey</stringProp>
-            <stringProp name="Argument.value">1e5868c0-5351-11f1-9183-b9ac055aa1ab</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
-          <elementProp name="payloadFile" elementType="Argument">
-            <stringProp name="Argument.name">payloadFile</stringProp>
-            <stringProp name="Argument.value">/home/azureuser/payload/payload1MB.txt</stringProp>
+            <stringProp name="Argument.value">2fde6880-3c93-11f1-8089-178c35bf0465</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
       </elementProp>
     </TestPlan>
     <hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Performance_Users">
-        <stringProp name="ThreadGroup.num_threads">${__P(threads,5)}</stringProp>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group 1">
+        <stringProp name="ThreadGroup.num_threads">${__P(threads,10)}</stringProp>
         <intProp name="ThreadGroup.ramp_time">1</intProp>
         <longProp name="ThreadGroup.duration">${__P(duration,300)}</longProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
@@ -46,51 +41,30 @@
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="ReadPayloadFile">
-          <stringProp name="scriptLanguage">groovy</stringProp>
-          <stringProp name="script">
-def payload = new File(vars.get(&quot;payloadFile&quot;)).getText(&quot;UTF-8&quot;)
-
-payload = payload.replace(&quot;\\\\&quot;, &quot;\\\\\\\\&quot;)
-payload = payload.replace(&quot;\&quot;&quot;, &quot;\\\\\&quot;&quot;)
-payload = payload.replace(&quot;\r&quot;, &quot;&quot;)
-payload = payload.replace(&quot;\n&quot;, &quot;&quot;)
-
-vars.put(&quot;payloadData&quot;, payload)
-
-log.info(&quot;FINAL PAYLOAD LENGTH = &quot; + payload.length())
-</stringProp>
-          <stringProp name="parameters"></stringProp>
-          <stringProp name="filename"></stringProp>
-          <stringProp name="cacheKey">false</stringProp>
-        </JSR223PreProcessor>
-        <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Invoke_ERT_Service">
-          <stringProp name="HTTPSampler.domain">${cloudName}</stringProp>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Invoke Subtract  ERT02">
+          <intProp name="HTTPSampler.connect_timeout">300000</intProp>
+          <intProp name="HTTPSampler.response_timeout">300000</intProp>
+          <stringProp name="HTTPSampler.domain">${host}</stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.path">${path}</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <stringProp name="HTTPSampler.method">POST</stringProp>
           <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
-            <collectionProp name="Arguments.arguments">
-              <elementProp name="" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">&#xd;
-{&quot;payload&quot;:&quot;${payloadData}&quot;}&#xd;
-</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-              </elementProp>
-            </collectionProp>
+          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+            <collectionProp name="Arguments.arguments"/>
           </elementProp>
         </HTTPSamplerProxy>
         <hashTree>
-          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="Headers">
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
             <collectionProp name="HeaderManager.headers">
               <elementProp name="" elementType="Header">
                 <stringProp name="Header.name">Authorization</stringProp>
-                <stringProp name="Header.value">Bearer e3378fc99c6e480eb3c97064dbe91391222741a7151345929b23b552513c64fc</stringProp>
+                <stringProp name="Header.value">Bearer ${bearerToken}</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">X-INSTANCE-API-KEY</stringProp>
+                <stringProp name="Header.value">${apiKey}</stringProp>
               </elementProp>
               <elementProp name="" elementType="Header">
                 <stringProp name="Header.name">Content-Type</stringProp>
@@ -100,25 +74,21 @@ log.info(&quot;FINAL PAYLOAD LENGTH = &quot; + payload.length())
                 <stringProp name="Header.name">Accept</stringProp>
                 <stringProp name="Header.value">application/json</stringProp>
               </elementProp>
-              <elementProp name="" elementType="Header">
-                <stringProp name="Header.name">X-INSTANCE-API-KEY</stringProp>
-                <stringProp name="Header.value">e15868c0-5351-11f1-9183-b9ac055aa1ab</stringProp>
-              </elementProp>
             </collectionProp>
           </HeaderManager>
           <hashTree/>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Check_HTTP_200">
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP 200 Assertion" enabled="true">
             <collectionProp name="Asserion.test_strings">
               <stringProp name="49586">200</stringProp>
             </collectionProp>
-            <stringProp name="Assertion.custom_message"></stringProp>
             <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
             <boolProp name="Assertion.assume_success">false</boolProp>
             <intProp name="Assertion.test_type">8</intProp>
+            <stringProp name="Assertion.custom_message"></stringProp>
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
-        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View_Results_Tree">
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
             <name>saveConfig</name>
@@ -159,6 +129,3 @@ log.info(&quot;FINAL PAYLOAD LENGTH = &quot; + payload.length())
     </hashTree>
   </hashTree>
 </jmeterTestPlan>
-
-
-

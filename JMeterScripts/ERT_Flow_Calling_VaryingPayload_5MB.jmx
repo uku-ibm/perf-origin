@@ -26,7 +26,7 @@
           </elementProp>
           <elementProp name="payloadFile" elementType="Argument">
             <stringProp name="Argument.name">payloadFile</stringProp>
-            <stringProp name="Argument.value">/home/azureuser/payload/payload1MB.txt</stringProp>
+            <stringProp name="Argument.value">/home/azureuser/payload/payload5MB.txt</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
@@ -49,16 +49,16 @@
         <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="ReadPayloadFile">
           <stringProp name="scriptLanguage">groovy</stringProp>
           <stringProp name="script">
-def payload = new File(vars.get(&quot;payloadFile&quot;)).getText(&quot;UTF-8&quot;)
+def payload = new File(vars.get("payloadFile")).getText("UTF-8")
 
-payload = payload.replace(&quot;\\\\&quot;, &quot;\\\\\\\\&quot;)
-payload = payload.replace(&quot;\&quot;&quot;, &quot;\\\\\&quot;&quot;)
-payload = payload.replace(&quot;\r&quot;, &quot;&quot;)
-payload = payload.replace(&quot;\n&quot;, &quot;&quot;)
+payload = payload.replace("\\\\", "\\\\\\\\")
+payload = payload.replace("\"", "\\\\\"")
+payload = payload.replace("\r", "")
+payload = payload.replace("\n", "")
 
-vars.put(&quot;payloadData&quot;, payload)
+vars.put("payloadData", payload)
 
-log.info(&quot;FINAL PAYLOAD LENGTH = &quot; + payload.length())
+log.info("FINAL PAYLOAD LENGTH = " + payload.length())
 </stringProp>
           <stringProp name="parameters"></stringProp>
           <stringProp name="filename"></stringProp>
@@ -78,7 +78,7 @@ log.info(&quot;FINAL PAYLOAD LENGTH = &quot; + payload.length())
               <elementProp name="" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.value">&#xd;
-{&quot;payload&quot;:&quot;${payloadData}&quot;}&#xd;
+{"payload":"${payloadData}"}&#xd;
 </stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
@@ -160,5 +160,6 @@ log.info(&quot;FINAL PAYLOAD LENGTH = &quot; + payload.length())
   </hashTree>
 </jmeterTestPlan>
 
+<!-- Made with Bob -->
 
 
