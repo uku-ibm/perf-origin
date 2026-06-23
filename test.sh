@@ -17,58 +17,6 @@ prepare_jmeter_script()
                 sed -i "s*$key*$value*g" JMeterScripts/"$workload".jmx
         done < "$file"
         sed -i "s*PATH*$endpointpath*g" JMeterScripts/"$workload".jmx
-        echo "Fetch auth, cookie, X-csrf-token"
-        rm -f token.json
-        curl -s -u ${TENANT_USERNAME}:${TENANT_PASSWORD} https://$CLOUD_NAME/enterprise/v1/user/token > token.json
-        
-        AUTH_TOKEN=`cat token.json | grep -oP '(?<="authtoken":")[^"]*'`
-        COOKIE=`cat token.json | grep -oP '(?<="cookie":")[^"]*'`
-        CSRF=`cat token.json | grep -oP '(?<="csrf":")[^"]*'`
-        #https://originawsint2.int-aw-us1.webmethods-int.io/enterprise/v1/projects?limit=19&skip=0&q=PerformanceTest
-        PROJECT_ID=$(curl -s -H "authtoken:$AUTH_TOKEN" -H "cookie:$COOKIE" -H "X-csrf-token:$CSRF" "https://$CLOUD_NAME/enterprise/v1/projects?limit=19&skip=0&q=$PROJECT_NAME" | grep -oP '(?<="ic_project_name":")[^"]*')
-        if [ -z "$PROJECT_ID" ]; then
-            echo "PROJECT_ID is empty or null"
-        else
-            echo "PROJECT_ID (Begin):$PROJECT_ID(end)"
-        fi
-        sleep 5s
-        echo "Fetching AGENT_ID"
-        AGENT_ID=$(curl -s -H "authtoken:$AUTH_TOKEN" -H "cookie:$COOKIE" -H "X-csrf-token:$CSRF" "https://$CLOUD_NAME/integration/rest/edge/runtimes?page=1&limit=19&searchKey=$REMOTE_EDGE_SERVER_NAME" | grep -oP '(?<="agentID":")[^"]*')
-        echo "AGENT_ID: $AGENT_ID"
-        if [ -z "$AGENT_ID" ]; then
-            echo "AGENT_ID is empty or null"
-        else
-            echo "Fetching AGENT_ID again"
-            AGENT_ID=$(curl -s -H "authtoken:$AUTH_TOKEN" -H "cookie:$COOKIE" -H "X-csrf-token:$CSRF" "https://$CLOUD_NAME/integration/rest/edge/runtimes?page=1&limit=19&searchKey=$REMOTE_EDGE_SERVER_NAME" | grep -oP '(?<="agentID":")[^"]*' | head -1)
-            echo "AGENT_ID: $AGENT_ID"
-            echo "AGENT_ID (Begin):$AGENT_ID(end)"
-        fi
-        
-        echo "REQUEST 1"
-        RESPONSE_OUTPUT=$(curl -s -X POST -H "Content-Type: application/json" -H "authtoken:$AUTH_TOKEN" -H "cookie:$COOKIE" -H "X-csrf-token:$CSRF" -d "{\"agentID\":\"default\",\"agentGroup\":\"Default\",\"apiEndPoint\":\"/scaffolding/agentManifest\",\"httpMethod\":\"POST\",\"input\":{\"agentId\":\"$AGENT_ID\",\"tags\":\"VaryingPayload\",\"services\":[{\"serviceName\":\"project.performancetest.integrations:VaryingPayload\"}]}}" "https://$CLOUD_NAME/integration/rest/edge/flow/admin-proxy")
-        echo "REQUEST 1, RESPONSE: $RESPONSE_OUTPUT"
-        
-        echo "REQUEST 2"
-        RESPONSE_OUTPUT=$(curl -s -X POST -H "Content-Type: application/json" -H "authtoken:$AUTH_TOKEN" -H "cookie:$COOKIE" -H "X-csrf-token:$CSRF" -d "{\"apiEndPoint\":\"/scaffolding/sync\",\"agentID\":\"$AGENT_ID\",\"agentGroup\":\"default\",\"httpMethod\":\"POST\",\"input\":{\"agentId\":\"$AGENT_ID\",\"enableConnections\":true}}" "https://$CLOUD_NAME/integration/rest/edge/flow/admin-proxy")
-        echo "REQUEST 2, RESPONSE: $RESPONSE_OUTPUT"
-        
-        echo "REQUEST 3"
-        RESPONSE_OUTPUT=$(curl -s -X POST -H "Content-Type: application/json" -H "authtoken:$AUTH_TOKEN" -H "cookie:$COOKIE" -H "X-csrf-token:$CSRF" -d "{\"apiEndPoint\":\"/package/PerformanceTestProject\",\"agentID\":\"default\",\"agentGroup\":\"default\",\"httpMethod\":\"GET\"}" "https://$CLOUD_NAME/integration/rest/edge/flow/admin-proxy")
-        echo "REQUEST 3, RESPONSE: $RESPONSE_OUTPUT"
-        
-        echo "REQUEST 4"
-        RESPONSE_OUTPUT=$(curl -s -X POST -H "Content-Type: application/json" -H "authtoken:$AUTH_TOKEN" -H "cookie:$COOKIE" -H "X-csrf-token:$CSRF" -d "{\"apiEndPoint\":\"/package/PerformanceTestProject\",\"agentID\":\"$AGENT_ID\",\"agentGroup\":\"default\",\"httpMethod\":\"GET\"}" "https://$CLOUD_NAME/integration/rest/edge/flow/admin-proxy")
-        echo "REQUEST 4, RESPONSE: $RESPONSE_OUTPUT"
-        
-        echo "AUTH_TOKEN-----$AUTH_TOKEN"
-        echo "COOKIE-----$COOKIE"
-        echo "CSRF-----$CSRF"
-        
-        sed -i "s*AGENT_ID*$AGENT_ID*g" JMeterScripts/"$workload".jmx
-        sed -i "s*PROJECT_ID*$PROJECT_ID*g" JMeterScripts/"$workload".jmx
-        sed -i "s*AUTH_TOKEN*$AUTH_TOKEN*g" JMeterScripts/"$workload".jmx
-        sed -i "s*COOKIE*$COOKIE*g" JMeterScripts/"$workload".jmx
-        sed -i "s*CSRF*$CSRF*g" JMeterScripts/"$workload".jmx
         sed -i "s*BEARER*$BEARER_TOKEN*g" JMeterScripts/"$workload".jmx
         sed -i "s*APIKEY*$API_KEY*g" JMeterScripts/"$workload".jmx
 }
@@ -89,10 +37,8 @@ echo "REMOTE_EDGE_SERVER_NAME: $REMOTE_EDGE_SERVER_NAME"
 File="Tests/Benchmark_testcase_All.csv"
 JMETER_HOME=/opt/apache-jmeter-5.6.3/
 TEMP_DIRECTORY=$1
-TENANT_USERNAME=$2
-TENANT_PASSWORD=$3
-BEARER_TOKEN=$4
-API_KEY=$5
+BEARER_TOKEN=$2
+API_KEY=$3
 Lines=$(cat $File)
 for Line in $Lines
 do

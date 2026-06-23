@@ -1,9 +1,13 @@
-name: bpt
+name: origin-performance-bpt
+run-name: ${{ inputs.id }} origin-performance-bpt
 on:
   workflow_dispatch:
+    inputs:
+      id:
+        required: true
 env:
-  TENANT_USERNAME: ${{ secrets.TENANT_USERNAME }}
-  TENANT_PASSWORD: ${{ secrets.TENANT_PASSWORD }}
+  BEARER: ${{ secrets.BEARER_MCSP_AZURE_TEST }}
+  TENANT_API_KEY: ${{ secrets.APIKEY_MCSP_AZURE_TEST }}
 jobs:
   setup:
     name: Checkout and fetch the baseline
@@ -22,8 +26,8 @@ jobs:
       - name: Checkout PerfUtils
         uses: actions/checkout@v4
         with:
-          repository: kuma1988/PerfUtil
-          token: ${{ secrets.TOKEN }} # `GH_PAT` is a secret that contains your PAT
+          repository: ibm-webmethods/PerfUtil
+          token: ${{ secrets.TOKEN }}
           ref: github_actions
           path: PerfUtil
       - name: Copy perf-origin and PerfUtil
@@ -47,60 +51,20 @@ jobs:
           name: Baseline-results-CSV
           path: .
 
-      - name: Pull the docker image and push it to the cloud.
-        run: |
-          echo "pull the docker image and push it to the cloud."
-          CURRENT_DIRECTORY=$PWD
-          echo "CURRENT_DIRECTORY=$PWD"
-          sh edge_docker_image.sh pull_edge_runtime_image $CURRENT_DIRECTORY
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: edge-docker-image
-          path: .
-
-  edge-runtime-setup:
-    name: Setup edge runtime
+  execute:
+    name: Execute the tests and compare with baseline
     needs: setup
     runs-on: [self-hosted, Linux, X64, vmperf]
 
     steps:
-      - name: Download the edge server and start the edge server
-        env:
-          RUNNER_CONTEXT: ${{ toJson(runner) }}
-        run: |
-          echo "Downloading the edge server."
-          rm -rf *
-      - uses: actions/download-artifact@v4
-        with:
-          name: edge-docker-image
-          path: .
-      - name: load the docker image
-        run: |
-          echo "Load the docker image."
-          CURRENT_DIRECTORY=$PWD
-          echo "CURRENT_DIRECTORY=$PWD"
-          sh edge_docker_image.sh load_edge_runtime_image $CURRENT_DIRECTORY
-          sh edge_docker_image.sh delete_existing_edge_runtime_from_tenant $TENANT_USERNAME $TENANT_PASSWORD
-          sh edge_docker_image.sh configure_edge_runtime_to_tenant $TENANT_USERNAME $TENANT_PASSWORD
-
-  execute:
-    name: Execute the tests and compare with baseline
-    needs: edge-runtime-setup
-    runs-on: [self-hosted, Linux, X64, vmperf]
-    env:
-      BEARER: ${{ github.ref_name == 'MCSP_Azure_Test' && secrets.BEARER_MCSP_AZURE_TEST || '' }}
-      APIKEY: ${{ github.ref_name == 'MCSP_Azure_Test' && secrets.APIKEY_MCSP_AZURE_TEST || '' }}
-
-    steps:
-      - name: Validate branch secret mapping
+      - name: Validate required secrets
         run: |
           if [ -z "$BEARER" ]; then
-            echo "No BEARER secret mapping configured for branch: ${{ github.ref_name }}"
+            echo "BEARER secret is missing"
             exit 1
           fi
-          if [ -z "$APIKEY" ]; then
-            echo "No APIKEY secret mapping configured for branch: ${{ github.ref_name }}"
+          if [ -z "$TENANT_API_KEY" ]; then
+            echo "TENANT_API_KEY secret is missing"
             exit 1
           fi
       - name: Remove the existing files
@@ -119,7 +83,7 @@ jobs:
           TEMP_DIRECTORY=$PWD/TEMP_DIRECTORY
           echo "CURRENT_DIRECTORY: $CURRENT_DIRECTORY"
           echo "TEMP_DIRECTORY: $TEMP_DIRECTORY"
-          sh test.sh $TEMP_DIRECTORY $TENANT_USERNAME $TENANT_PASSWORD $BEARER $APIKEY
+          sh test.sh $TEMP_DIRECTORY $BEARER $TENANT_API_KEY
       - uses: actions/upload-artifact@v4
         with:
           name: Test-results-CSV
