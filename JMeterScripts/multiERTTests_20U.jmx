@@ -16,12 +16,12 @@
           </elementProp>
           <elementProp name="bearerToken" elementType="Argument">
             <stringProp name="Argument.name">bearerToken</stringProp>
-            <stringProp name="Argument.value">4f2d36eb5a41468199b3afe3a9a4a0fe229dfef957184afb8ef7c88ea3285d0d</stringProp>
+            <stringProp name="Argument.value">BEARER</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="apiKey" elementType="Argument">
             <stringProp name="Argument.name">apiKey</stringProp>
-            <stringProp name="Argument.value">2fde6880-3c93-11f1-8089-178c35bf0465</stringProp>
+            <stringProp name="Argument.value">APIKEY</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="path_ERT1" elementType="Argument">

@@ -16,12 +16,12 @@
           </elementProp>
           <elementProp name="bearer" elementType="Argument">
             <stringProp name="Argument.name">bearer</stringProp>
-            <stringProp name="Argument.value">e3378fc99c6e480eb3c97064dbe91391222741a7151345929b23b552513c64fc</stringProp>
+            <stringProp name="Argument.value">BEARER</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="apiKey" elementType="Argument">
             <stringProp name="Argument.name">apiKey</stringProp>
-            <stringProp name="Argument.value">1e5868c0-5351-11f1-9183-b9ac055aa1ab</stringProp>
+            <stringProp name="Argument.value">APIKEY</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="payloadFile" elementType="Argument">
@@ -90,7 +90,7 @@ log.info(&quot;FINAL PAYLOAD LENGTH = &quot; + payload.length())
             <collectionProp name="HeaderManager.headers">
               <elementProp name="" elementType="Header">
                 <stringProp name="Header.name">Authorization</stringProp>
-                <stringProp name="Header.value">Bearer e3378fc99c6e480eb3c97064dbe91391222741a7151345929b23b552513c64fc</stringProp>
+                <stringProp name="Header.value">Bearer BEARER</stringProp>
               </elementProp>
               <elementProp name="" elementType="Header">
                 <stringProp name="Header.name">Content-Type</stringProp>
@@ -102,7 +102,7 @@ log.info(&quot;FINAL PAYLOAD LENGTH = &quot; + payload.length())
               </elementProp>
               <elementProp name="" elementType="Header">
                 <stringProp name="Header.name">X-INSTANCE-API-KEY</stringProp>
-                <stringProp name="Header.value">e15868c0-5351-11f1-9183-b9ac055aa1ab</stringProp>
+                <stringProp name="Header.value">APIKEY</stringProp>
               </elementProp>
             </collectionProp>
           </HeaderManager>
