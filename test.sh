@@ -64,15 +64,13 @@ prepare_jmeter_script()
         echo "COOKIE-----$COOKIE"
         echo "CSRF-----$CSRF"
         
-        # Generate Bearer token if needed (for OAuth-based scripts)
-        BEARER_TOKEN=$AUTH_TOKEN
-        
         sed -i "s*AGENT_ID*$AGENT_ID*g" JMeterScripts/"$workload".jmx
         sed -i "s*PROJECT_ID*$PROJECT_ID*g" JMeterScripts/"$workload".jmx
         sed -i "s*AUTH_TOKEN*$AUTH_TOKEN*g" JMeterScripts/"$workload".jmx
         sed -i "s*COOKIE*$COOKIE*g" JMeterScripts/"$workload".jmx
         sed -i "s*CSRF*$CSRF*g" JMeterScripts/"$workload".jmx
         sed -i "s*BEARER*$BEARER_TOKEN*g" JMeterScripts/"$workload".jmx
+        sed -i "s*APIKEY*$API_KEY*g" JMeterScripts/"$workload".jmx
 }
 
 execute_jmeter_script()
@@ -89,10 +87,12 @@ source ./origin.properties # CLOUD_NAME, REMOTE_EDGE_SERVER_NAME will be picked 
 echo "CLOUD_NAME: $CLOUD_NAME"
 echo "REMOTE_EDGE_SERVER_NAME: $REMOTE_EDGE_SERVER_NAME"
 File="Tests/Benchmark_testcase_All.csv"
-JMETER_HOME=/home/ec2-user/apache-jmeter-5.5
+JMETER_HOME=/opt/apache-jmeter-5.6.3/
 TEMP_DIRECTORY=$1
 TENANT_USERNAME=$2
 TENANT_PASSWORD=$3
+BEARER_TOKEN=$4
+API_KEY=$5
 Lines=$(cat $File)
 for Line in $Lines
 do
